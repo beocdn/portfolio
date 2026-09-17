@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sinemulat-Entry</title>
+  <style>
+	header {
+      position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  background: #fff;
+	  color: #000;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 35px 60px;
+	  z-index: 1000;
+	}
+
+	.logo-fixed {
+      position: fixed;
+	  top: 10px;
+	  left: 20px;
+	  width: 90px;
+	  height: 90px;
+	  margin-left: 40px;
+	  z-index: 1001;
+	  cursor: pointer;
+	}
+
+	header nav {
+	  display: flex;
+	  align-items: center;
+	  margin-right: 120px;
+	}
+
+	header nav img {
+	  margin-left: 25px;
+	  width: 100px;
+	  height: auto;
+	  cursor: pointer;
+	}
+
+	.nav-img.about { width: 80px; }
+	.nav-img.portfolio { width: 130px; }
+	.nav-img.services { width: 113px; }
+	.nav-img.contact { width: 100px; }
+	
+	
+	
+    .slider-container {
+      position: relative;
+      width: 600px;
+      max-width: 90vw;
+      height: 400px;
+      margin: 100px auto;
+      overflow: hidden;
+      cursor: ew-resize;
+    }
+
+    .slider-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .after-image {
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path 0.1s;
+    }
+
+    .slider-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: white;
+      z-index: 10;
+      transform: translateX(-2px);
+    }
+
+  </style>
+</head>
+<body>
+
+	<!-- BeoWuld Icon -->
+		<a href="home main page.html">
+			<img class="logo-fixed" src="../assets/BeoWuld Logo White.png" alt="BeoWuld Logo">
+		</a>
+
+	<!-- Top Navigation -->
+	<header>
+	  <div></div>
+	  <nav>
+		<a href="home main page.html#about"><img class="nav-img about" src="../assets/About Asset.png" alt="About"></a>
+		<a href="home main page.html#branding"><img class="nav-img portfolio" src="../assets/Portfolio Asset.png" alt="Portfolio"></a>
+		<a href="home main page.html#services"><img class="nav-img services" src="../assets/Services Asset.png" alt="Services"></a>
+		<a href="home main page.html#contact"><img class="nav-img contact" src="../assets/Contact Asset.png" alt="Contact"></a>
+	  </nav>
+	</header>
+	
+	<!-- Tiny down arrow under the logo -->
+	<a href="home main page.html">
+	  <img src="../assets/Back Asset.png" alt="Back to Main"
+		   style="position: fixed; top: 110px; left: 10px; width: 90px; height: auto; cursor: pointer; z-index: 1001;">
+	</a>
+
+	<!-- Main content -->
+	
+	<main style="padding-top: 150px; text-align: center; position: relative;">
+
+<div class="slider-container" id="slider">
+  <img src="../assets/Before.png" alt="Before">
+  <img src="../assets/After.png" alt="After" class="after-image" id="afterImage">
+  <div class="slider-handle" id="handle"></div>
+</div>
+
+  <h1 style="font-family: Garamond, serif; font-variant: small-caps; font-weight: bold; font-size: 1.5em; margin-top: 20px;">Hamster Bear Reflection</h1>
+  <p style="font-family: Garamond, serif; font-size: 1.2em; margin: 10px 20px;">From the Kitten Tiger Reflection meme, this masterpiece was inspired by a friend comparing himself to a hamster.</p>
+	</main>
+
+<script>
+  const slider = document.getElementById('slider');
+  const afterImage = document.getElementById('afterImage');
+  const handle = document.getElementById('handle');
+
+  function updateSlider(x) {
+    const rect = slider.getBoundingClientRect();
+    const position = Math.min(Math.max(0, x - rect.left), rect.width);
+    const percent = (position / rect.width) * 100;
+    afterImage.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    handle.style.left = `${percent}%`;
+  }
+
+  slider.addEventListener('mousemove', e => {
+    if (e.buttons !== 1) return; // Only drag when mouse button is held
+    updateSlider(e.clientX);
+  });
+
+  slider.addEventListener('mousedown', e => updateSlider(e.clientX));
+  slider.addEventListener('touchstart', e => updateSlider(e.touches[0].clientX));
+  slider.addEventListener('touchmove', e => updateSlider(e.touches[0].clientX));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wantedposter1</title>
+  <style>
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 35px 60px;
+      z-index: 1000;
+    }
+
+    .logo-fixed {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      width: 90px;
+      height: 90px;
+      margin-left: 40px;
+      z-index: 1001;
+      cursor: pointer;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      margin-right: 120px;
+    }
+
+    header nav img {
+      margin-left: 25px;
+      width: 100px;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .nav-img.about { width: 80px; }
+    .nav-img.portfolio { width: 130px; }
+    .nav-img.services { width: 113px; }
+    .nav-img.contact { width: 100px; }
+
+    .page-content {
+      display: flex;
+      padding: 40px;
+    }
+
+    .left-column {
+      flex: 1;
+    }
+
+    .left-column img#main-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .thumbnail-row {
+      display: flex;
+      gap: 10px;
+	  margin-bottom: 20px; /* add space below thumbnails */
+    }
+
+    .thumbnail {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 3px solid black;
+      transition: border 0.3s;
+    }
+
+    .thumbnail:hover {
+      border: 2px solid #999;
+    }
+
+    .description-box {
+      background-color: black;
+      color: white;
+      padding: 20px 20px;
+      width: 100%;
+      max-width: 400px;
+      font-family: 'Garamond', serif;
+    }
+
+    .description-box h2 {
+      font-size: 18px;
+      display: flex;
+	  flex-direction: column;
+    }
+
+    .contact-button {
+      display: inline-block;
+      background-color: white;
+      color: black;
+      padding: 10px 140px;
+      margin-top: 15px;
+      text-decoration: none;
+      font-family: 'Garamond', serif;
+      border: 2px solid white;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .contact-button:hover {
+      background-color: black;
+      color: white;
+      border: 2px solid white;
+    }
+
+	.right-inner {
+	  margin-top: 100px; /* move thumbs + box downward */
+	}
+
+	.description-box {
+	  width: 400px; /* customize this */
+	}
+
+	.description-box p {
+	  text-align: left;
+	}
+
+	.description-box h2 {
+	  display: flex;
+	  justify-content: flex-start;
+	  gap: 10px;
+	}
+
+	.description-box .title {
+	  border-bottom: 2px solid white;
+	  padding-bottom: 4px;
+	}
+
+	
+  </style>
+</head>
+<body>
+
+  <!-- BeoWuld Icon -->
+  <a href="home main page.html">
+    <img class="logo-fixed" src="../assets/BeoWuld Logo White.png" alt="BeoWuld Logo">
+  </a>
+
+  <!-- Top Navigation -->
+  <header>
+    <div></div>
+    <nav>
+      <a href="home main page.html#about"><img class="nav-img about" src="../assets/About Asset.png" alt="About"></a>
+      <a href="home main page.html#branding"><img class="nav-img portfolio" src="../assets/Portfolio Asset.png" alt="Portfolio"></a>
+      <a href="home main page.html#services"><img class="nav-img services" src="../assets/Services Asset.png" alt="Services"></a>
+      <a href="home main page.html#contact"><img class="nav-img contact" src="../assets/Contact Asset.png" alt="Contact"></a>
+    </nav>
+  </header>
+
+  <!-- Tiny down arrow under the logo -->
+  <a href="home main page.html">
+    <img src="../assets/Back Asset.png" alt="Back to Main"
+         style="position: fixed; top: 110px; left: 10px; width: 90px; height: auto; cursor: pointer; z-index: 1001;">
+  </a>
+
+  <main style="padding-top: 150px; text-align: center; position: relative;">
+    <div class="page-content">
+      <div class="left-column">
+        <img src="../assets/UBLC Social Media Post Cadion.jpg" alt="Main Preview" id="main-image">
+      </div>
+
+		<div class="right-column">
+   <div class="right-inner">
+    <div class="thumbnail-row">
+      <img src="../assets/UBLC Social Media Post Cadion.jpg" class="thumbnail" onclick="changeImage(this.src)">
+      <img src="../assets/Meme for UB.jpg" class="thumbnail" onclick="changeImage(this.src)">
+    </div>
+
+    <div class="description-box">
+      <h2><span class="title">Meme Marketing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; One (1)</span></h2>
+      <p><b>&nbsp;&nbsp;&nbsp Can be copied from business aesthetic/format<br>
+         &nbsp;&nbsp;&nbsp or a meme format in itself modified.<br><br>
+         &nbsp;&nbsp;&nbsp Price varies depending on complexity.</b>
+      </p>
+      <a href="contact.html" class="contact-button"><b>Contact Me</b></a>
+    </div>
+   </div>
+		</div>
+
+    </div>
+  </main>
+
+  <script>
+    function changeImage(src) {
+      document.getElementById('main-image').src = src;
+    }
+  </script>
+</body>
+</html>

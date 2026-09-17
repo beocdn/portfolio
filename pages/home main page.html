@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BeoWuld Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      scroll-behavior: smooth;
+      font-family: Garamond, serif;
+      font-size: 18px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 35px 60px;
+      z-index: 1000;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+    }
+
+    header nav img {
+      margin-left: 25px;
+      width: 100px;
+      height: auto;
+      cursor: pointer;
+    }
+	
+	.center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 70%;
+     }
+
+    .logo-fixed {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      width: 90px;
+      height: 90px;
+      margin-left: 40px;
+      z-index: 1001;
+      cursor: pointer;
+    }
+	
+	.has-corners {
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.corner {
+	  position: absolute;
+	  width: 10px;
+	  height: 10px;
+	  border: 3px solid black;
+	  opacity: 0;
+	  transition: opacity 0.2s ease;
+	  pointer-events: none;
+	}
+
+	.has-corners:hover .corner {
+	  opacity: 1;
+	}
+
+	.corner.tl {
+	  top: -6px;
+	  left: -6px;
+	  border-right: none;
+	  border-bottom: none;
+	}
+
+    .nav-img {
+      margin-left: 25px;
+      height: auto;
+    }
+
+    .nav-img.about {
+      width: 80px;
+    }
+
+    .nav-img.portfolio {
+      width: 130px;
+    }
+
+    .nav-img.services {
+      width: 113px;
+    }
+
+    .nav-img.contact {
+      width: 100px;
+    }
+
+    .portfolio-box {
+      background: rgba(255, 255, 255, 0.90);
+      width: 80%;
+      max-width: 1200px;
+      height: 100vh;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* optional shadow */
+      overflow-x: auto;
+      overflow-y: hidden
+	  white-space: nowrap;
+      margin: 0 auto; /* This centers the box horizontally */
+    }
+	
+	.services-and-contact-box {
+      background: rgba(255, 255, 255, 0.90);
+      width: 80%;
+      max-width: 1200px;
+      height: 90vh;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      margin: 0 auto;
+    }
+
+    .image-grid {
+      display: none;
+    }
+	
+	.image-item {
+	  display: inline-block;
+      width: 30%;
+	  margin: 1%
+	  text-align: center;
+	  position: relative;
+    }
+	
+	.image-item .corner {
+	  position: absolute;
+	  width: 15px;
+	  height: 15px;
+	  border: 3px solid black;
+	  opacity: 0;
+	  transition: opacity 0.2s ease;
+	  pointer-events: none; /* so it doesn't interfere with clicks */
+	}
+
+	.image-item:hover .corner {
+	  opacity: 1;
+	}
+
+	.corner.tl {
+	  top: -6px;
+	  left: -6px;
+	  border-right: none;
+	  border-bottom: none;
+	}
+
+	.corner.tr {
+	  top: -6px;
+	  right: -6px;
+	  border-left: none;
+	  border-bottom: none;
+	}
+
+	.corner.bl {
+	  bottom: -6px;
+	  left: -6px;
+	  border-top: none;
+	  border-right: none;
+	}
+
+	.corner.br {
+	  bottom: -6px;
+	  right: -6px;
+	  border-top: none;
+	  border-left: none;
+	}
+	
+	.image-item a {
+	  text-decoration: none;
+	  color: black;
+	  cursor: pointer;
+	}
+
+	.image-item img {
+	  width: 100%;
+	  height: auto;
+	  border: 7px solid black;
+	  display: block;
+	}
+
+	.image-item p {
+	  margin-top: 8px;
+	  text-align: center;
+	  color: black;
+	  font-weight: normal;
+	  text-decoration: underline;
+	  cursor: pointer;
+	  font-size: 25px;
+	}
+		
+	.image-item img {
+	  width: 100%;
+	  height: auto;
+    }
+	
+	.image-row {
+	  display: flex;
+	  flex-wrap: wrap;
+	  justify-content: center; /* center all image items */
+	  gap: 20px; /* control spacing between images */
+	  padding: 10px 0;
+	}
+
+	
+	section:target .image-grid:target {
+      display: block;
+    }
+	
+    #branding {
+      display: block;
+    }	
+	
+	#portfolio-section,
+	.image-grid {
+	  padding-left: 2vw;
+	  padding-right: 2vw;
+	}
+
+	#portfolio-title {
+	  width: 25%;
+	  height: auto;
+	  display: block;
+	  margin-bottom: 10px;
+	}
+
+	#portfolio-line {
+	  border: none;
+	  border-top: 4px solid black;
+	  margin: 0;
+	  width: 100%;
+	}
+
+
+    section {
+      min-height: 100vh;
+      scroll-margin-top: 100px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 5px;
+    }
+	
+	.carousel {
+	  width: 217px;
+	  height: 150px;
+	  overflow: hidden;
+	  position: relative;
+	  bottom: 361px;
+	  left: 46px;
+	  right: auto;
+	}
+
+	.carousel-track {
+	  display: flex;
+	  animation: scrollImages 59s linear infinite;
+	}
+
+	.carousel-track img {
+	  width: auto;         /* preserve image ratio */
+	  height: 150px;       /* force same height for all carousel images */
+	  flex-shrink: 0;
+	  object-fit: cover; 
+	}
+	
+	@keyframes scrollImages {
+	  0%   { transform: translateX(0%); }
+	  33%  { transform: translateX(-100%); }
+	  66%  { transform: translateX(-200%); }
+	  100% { transform: translateX(0%); }
+	}
+
+	input[type="radio"] {
+	  display: none;
+	}
+
+	.poster-set-container {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  position: relative;
+	  min-height: 500px;
+	}
+
+	.poster-set,
+	.second-set {
+	  display: none;
+	  flex-direction: row;
+	  gap: 20px;
+	}
+	
+	.poster-placeholder {
+	  text-align: center;
+	  font-family: Garamond, serif;
+	  font-variant: small-caps;
+	  font-size: 28px;
+	  font-weight: bold;
+	  margin-top: 40px;
+	  color: black;
+	  display: none;
+	}
+
+	#group2:checked ~ .poster-set-container .poster-placeholder {
+	  display: block;
+	}
+
+	#group1:checked ~ .poster-set-container .poster-set {
+	  display: flex;
+	}
+
+	#group2:checked ~ .poster-set-container .second-set {
+	  display: flex;
+	}
+
+	.arrow {
+	  cursor: pointer;
+	  z-index: 10;
+	  position: absolute;
+	  top: 50%;
+      transform: translateY(-50%);
+	}
+	
+	.arrow.left {
+      left: 10px;
+	}
+
+	.arrow.right {
+      right: 10px;
+	}
+	
+	.portfolio-categories {
+	  display: flex;
+	  justify-content: flex-start;
+	  gap: 36px; /* adds space between images */
+	  margin: 20px 0 20px 10px;
+	  padding-left: 1.5vw;
+	}
+	
+	.poster {
+	  position: relative;
+	  width: 300px;
+	  height: 450px;
+	  background: none;
+	  cursor: pointer;
+	  text-align: center;
+	}
+	
+	.poster .frame {
+	  width: 100%;
+	  height: 100%;
+	  z-index: 0;
+	}
+
+	.poster .text {
+	  position: absolute;
+	  bottom: 20px;
+	  width: 100%;
+	  z-index: 2;
+	}
+
+    footer {
+      text-align: center;
+      padding: 50px 0;
+      background: #fff;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+    }
+	
+	.poster .corner {
+	  position: absolute;
+	  width: 15px;
+	  height: 15px;
+	  border: 3px solid black;
+	  opacity: 0;
+	  transition: opacity 0.2s ease;
+	  pointer-events: none;
+	}
+
+	.poster:hover .corner {
+	  opacity: 1;
+	}
+
+	.poster .corner.tl {
+	  top: -6px;
+	  left: -6px;
+	  border-right: none;
+	  border-bottom: none;
+	}
+
+	.poster .corner.tr {
+	  top: -6px;
+	  right: -6px;
+	  border-left: none;
+	  border-bottom: none;
+	}
+
+	.poster .corner.bl {
+	  bottom: -6px;
+	  left: -6px;
+	  border-top: none;
+	  border-right: none;
+	}
+
+	.poster .corner.br {
+	  bottom: -6px;
+	  right: -6px;
+	  border-top: none;
+	  border-left: none;
+	}
+  </style>
+</head>
+<body>
+
+  <!-- BeoWuld Icon -->
+  <a href="index.html">
+    <img class="logo-fixed" src="../assets/BeoWuld Logo White.png" alt="BeoWuld Logo">
+  </a>
+
+  <!-- Top Navigation -->
+  <header>
+    <div></div>
+    <nav>
+      <a href="#about"><img class="nav-img about" src="../assets/About Asset.png" alt="About"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></a>
+      <a href="#branding"><img class="nav-img portfolio" src="../assets/Portfolio Asset.png" alt="Portfolio"></a>
+      <a href="#services"><img class="nav-img services" src="../assets/Services Asset.png" alt="Services"></a>
+      <a href="#contact"><img class="nav-img contact" src="../assets/Contact Asset.png" alt="Contact"></a>
+    </nav>
+  </header>
+
+  <!-- Sections -->
+  <main>
+    <section id="about" style="background-image: url('../assets/Complete About Me Asset.png');"></section>
+    
+    <!-- Portfolio Section 1 -->
+    <section id="branding" style="background-image: url('../assets/BG BeoWuld Son Fight.jpg'); display: flex; justify-content: center; align-items: center;">
+      <div class="portfolio-box" "image grid">
+        <!-- Portfolio Title -->
+        <div id="portfolio-section">
+          <img src="../assets/Portfolio Asset.png" alt="Portfolio" id="portfolio-title">
+          <hr id="portfolio-line">
+        </div>
+
+        <!-- Subcategories as Navigation -->
+        <div id="portfolio-categories" class="portfolio-categories">
+          <a href="#branding" class="has-corners"><img src="../assets/Design & Branding Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#illustrations" class="has-corners"><img src="../assets/Illustrations Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#photography" class="has-corners"><img src="../assets/Photography Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#memes-n-marketing" class="has-corners"><img src="../assets/Memes & Marketing Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+        </div>
+		
+		<!-- Branding -->
+	<div class="image-row">
+		<div class="image-item">
+		  <a href="sinemulat-entry.html">
+		  <div style="position: relative;">
+			<img src="../assets/SineMulat Entry.png" alt="SineMulat Entry">
+		    <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+			</div>
+			<p>SineMulat Entry</p>
+		  </a>
+		</div>
+		   
+		   
+           <div class="image-item">
+            <a href="fashion-show-poster.html">
+			<div style="position: relative;">
+            <img src="../assets/Fashion Show Poster Asset.png" alt="Fashion Show">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Fashion Show Poster</u></p>
+            </a>
+           </div>
+		   
+		   <div class="image-item">
+            <a href="mybreads-logo-n-mockups.html">
+			<div style="position: relative;">
+            <img src="../assets/MyBreads Logo n Mockups Asset.png" alt="MyBreads Logo n Mockups">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>MyBreads Logo n Mockups</u></p>
+            </a>
+           </div>
+		   
+		   <div class="image-item">
+            <a href="ub-flyer.html">
+			<div style="position: relative;">
+            <img src="../assets/UB Flyer Asset.png" alt="UB Flyer">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>UB Flyer</u></p>
+            </a>
+           </div>
+		   
+		   <div class="image-item">
+            <a href="sea-breeze.html">
+			<div style="position: relative;">
+            <img src="../assets/Sea Breeze Menu Asset.png" alt="Sea Breeze Menu">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Sea Breeze Menu</u></p>
+            </a>
+           </div>
+		   
+		   <div class="image-item">
+            <a href="business-card.html">
+			<div style="position: relative;">
+            <img src="../assets/Business Card Design Asset.png" alt="Business Card Design">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Business Card Design</u></p>
+            </a>
+           </div>
+	</div>
+	  </div>
+	</section>
+		   
+		   
+    <!-- Portfolio Section 2 -->
+    <section id="illustrations" style="background-image: url('../assets/BG BeoWuld Mother Fight.jpg'); display: flex; justify-content: center; align-items: center;">
+      <div class="portfolio-box" "image grid">
+        <!-- Portfolio Title -->
+        <div id="portfolio-section">
+          <img src="../assets/Portfolio Asset.png" alt="Portfolio" id="portfolio-title">
+          <hr id="portfolio-line">
+        </div>
+
+        <!-- Subcategories as Navigation -->
+        <div id="portfolio-categories" class="portfolio-categories">
+          <a href="#branding" class="has-corners"><img src="../assets/Design & Branding Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#illustrations" class="has-corners"><img src="../assets/Illustrations Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#photography" class="has-corners"><img src="../assets/Photography Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#memes-n-marketing" class="has-corners"><img src="../assets/Memes & Marketing Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+        </div>
+		
+		<!-- Illustrations -->
+	<div class="image-row">
+		   <div class="image-item">
+            <a href="le-self-portrait.html">
+			<div style="position: relative;">
+            <img src="../assets/Le Self Portrait Asset.png" alt="Le Self Portrait">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Le Self Portrait</u></p>
+            </a>
+           </div>
+		 
+           <div class="image-item">
+            <a href="theres-still-time.html">
+			<div style="position: relative;">
+            <img src="../assets/There's Still Time Asset.png" alt="There's Still Time">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>There's Still Time</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="oc-character-study.html">
+			<div style="position: relative;">
+            <img src="../assets/OC Character Study Asset.png" alt="OC Character Study">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>OC Character Study</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="b-illuminated.html">
+			<div style="position: relative;">
+            <img src="../assets/B Illuminated Asset.png" alt="B Illuminated">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>B Illuminated</u></p>
+            </a>
+           </div>
+
+		   <div class="image-item">
+            <a href="oc-infographic.html">
+			<div style="position: relative;">
+            <img src="../assets/OC Infographic Asset.png" alt="OC Infographic">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>OC Infographic</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="woman-weeps.html">
+			<div style="position: relative;">
+            <img src="../assets/Woman Weeps Asset.png" alt="Woman Weeps">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Woman Weeps</u></p>
+            </a>
+           </div>
+		  </div>
+	</div>
+	</section>
+
+
+    <!-- Portfolio Section 3 -->
+    <section id="photography" style="background-image: url('../assets/BG BeoWuld Dragon Fight.jpg'); display: flex; justify-content: center; align-items: center;">
+      <div class="portfolio-box" "image grid">
+        <!-- Portfolio Title -->
+        <div id="portfolio-section">
+          <img src="../assets/Portfolio Asset.png" alt="Portfolio" id="portfolio-title">
+          <hr id="portfolio-line">
+        </div>
+
+        <!-- Subcategories as Navigation -->
+        <div id="portfolio-categories" class="portfolio-categories">
+          <a href="#branding" class="has-corners"><img src="../assets/Design & Branding Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#illustrations" class="has-corners"><img src="../assets/Illustrations Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#photography" class="has-corners"><img src="../assets/Photography Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#memes-n-marketing" class="has-corners"><img src="../assets/Memes & Marketing Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+        </div>
+		
+		<!-- Photography -->
+	<div class="image-row">
+		   <div class="image-item">
+            <a href="wild-rune-self-portrait.html">
+			<div style="position: relative;">
+            <img src="../assets/Wild Rune Self Portrait Asset.png" alt="Wild Rune Self Portrait">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Wild Rune Self Portrait</u></p>
+            </a>
+           </div>
+		 
+           <div class="image-item">
+            <a href="tamagudetama.html">
+			<div style="position: relative;">
+            <img src="../assets/Tamagudetama Asset.png" alt="Tamagudetama">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Tamagudetama</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="mybreads-korean-bread.html">
+			<div style="position: relative;">
+            <img src="../assets/MyBreads Korean Bread Asset.png" alt="MyBreads Korean Bread">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>MyBreads Korean Bread</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="cemeteerie.html">
+			<div style="position: relative;">
+            <img src="../assets/Cemeteerie Asset.png" alt="Cemeteerie">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Cemeteerie</u></p>
+            </a>
+           </div>
+
+		   <div class="image-item">
+            <a href="ryujin-magazine-photoshoot.html">
+			<div style="position: relative;">
+            <img src="../assets/Ryujin Magazine Photoshoot Asset.png" alt="Ryujin Magazine Photoshoot">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Ryujin Magazine Photoshoot</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="taki-ahh-bonfire.html">
+			<div style="position: relative;">
+            <img src="../assets/Taki Ahh Bonfire Asset.png" alt="Taki Ahh Bonfire">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Taki Ahh Bonfire</u></p>
+            </a>
+           </div>
+		  </div>
+	</div>
+	</section>		  
+
+
+    <!-- Portfolio Section 4 -->
+    <section id="memes-n-marketing" style="background-image: url('../assets/BG BeoWuld Afterfight.jpg'); display: flex; justify-content: center; align-items: center;">
+      <div class="portfolio-box" "image grid">
+        <!-- Portfolio Title -->
+        <div id="portfolio-section">
+          <img src="../assets/Portfolio Asset.png" alt="Portfolio" id="portfolio-title">
+          <hr id="portfolio-line">
+        </div>
+
+        <!-- Subcategories as Navigation -->
+        <div id="portfolio-categories" class="portfolio-categories">
+          <a href="#branding" class="has-corners"><img src="../assets/Design & Branding Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#illustrations" class="has-corners"><img src="../assets/Illustrations Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#photography" class="has-corners"><img src="../assets/Photography Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+          <a href="#memes-n-marketing" class="has-corners"><img src="../assets/Memes & Marketing Asset.png" class="category-btn"><span class="corner tl"></span><span class="corner br"></span></a>
+        </div>
+		
+		<!-- Memes-n-Marketing -->
+	<div class="image-row">
+		   <div class="image-item">
+            <a href="socmed-market.html">
+			<div style="position: relative;">
+            <img src="../assets/SocMed Market Assets.png" alt="SocMed Marketing">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>SocMed Marketing</u></p>
+            </a>
+           </div>
+		 
+           <div class="image-item">
+            <a href="meme-for-ub.html">
+			<div style="position: relative;">
+            <img src="../assets/Meme for UB Asset.png" alt="Meme for UB">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Meme for UB</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="modify-meme.html">
+			<div style="position: relative;">
+            <img src="../assets/Modify Meme Asset.png" alt="Modify Meme">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Modify Meme</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="randomeme-add.html">
+			<div style="position: relative;">
+            <img src="../assets/Randomeme Add Asset.png" alt="Randomeme Add">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Randomeme Add</u></p>
+            </a>
+           </div>
+
+		   <div class="image-item">
+            <a href="hamster-bear-reflection-meme.html">
+			<div style="position: relative;">
+            <img src="../assets/Hamster Bear Reflection Meme Asset.png" alt="Hamster Bear Reflection Meme">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>Hamster Bear Reflection Meme</u></p>
+            </a>
+           </div>
+		 
+		   <div class="image-item">
+            <a href="ub-meme-ad.html">
+			<div style="position: relative;">
+            <img src="../assets/UB Meme Ad Asset.png" alt="UB Meme Ad">
+            <span class="corner tl"></span>
+		    <span class="corner tr"></span>
+		    <span class="corner bl"></span>
+		    <span class="corner br"></span>
+		    </div>
+			<p><u>UB Meme Ad</u></p>
+            </a>
+           </div>
+		  </div>
+	</div>
+	</section>	  
+
+  </main>
+
+  <main>
+        <!-- Services Section -->
+    <section id="services" style="background-image: url('../assets/BG BeoWuld RIP.png'); display: flex; justify-content: center; align-items: center;">
+      <div class="services-and-contact-box">
+        <!-- Services Title -->
+        <div id="services-section" style="text-align: left;">
+          <img src="../assets/Services Asset.png" alt="Services" style="width: 25%; height: auto;" id="services-title">
+        </div>
+
+
+  
+      <!-- Carousel group toggle -->
+      <input type="radio" name="poster-group" id="group1" checked>
+      <input type="radio" name="poster-group" id="group2">
+
+	  <div class="poster-set-container">
+
+        <!-- LEFT ARROW -->
+        <img class="arrow left" src="../assets/BeoWuld Finger Left.png" alt="Left Arrow" style="width: 40px; height: auto; cursor: pointer;" onclick="document.getElementById('group1').checked = true;">
+    
+        <!-- Posters Set -->
+        <div class="poster-set">
+          <a href="wantedposter1.html" class="poster">
+
+			<img class="frame" src="../assets/WANTED Art Commisions Asset.png">
+            <span class="corner tl"></span>
+			<span class="corner tr"></span>
+			<span class="corner bl"></span>
+			<span class="corner br"></span>
+
+		   <div class="carousel">
+              <div class="carousel-track">
+                <img src="../assets/Hamster Bear Reflection Meme Asset.png">
+                <img src="../assets/Woman Weeps Asset.png">
+                <img src="../assets/OC Character Study Asset.png">
+              </div>
+            </div>
+          </a>
+		  
+		  
+          <a href="wantedposter2.html" class="poster">
+
+			<img class="frame" src="../assets/WANTED Event Coverage Asset.png">
+            <span class="corner tl"></span>
+			<span class="corner tr"></span>
+			<span class="corner bl"></span>
+			<span class="corner br"></span>
+
+			<div class="carousel">
+              <div class="carousel-track">
+                <img src="../assets/Documentation Asset.jpg">
+                <img src="../assets/HS Intrams Asset.JPG">
+                <img src="../assets/Intercollegiate Winner Asset.JPG">
+              </div>
+            </div>
+          </a>
+
+
+          <a href="wantedposter3.html" class="poster">
+ 
+		   <img class="frame" src="../assets/WANTED Meme Marketing Asset.png">
+           <span class="corner tl"></span>
+		   <span class="corner tr"></span>
+		   <span class="corner bl"></span>
+		   <span class="corner br"></span>
+
+		   <div class="carousel">
+              <div class="carousel-track">
+                <img src="../assets/UB Meme Ad Asset.png">
+                <img src="../assets/Meme for UB Asset.png">
+                <img src="../assets/SocMed Market Assets.png">
+              </div>
+            </div>
+          </a>
+			
+        </div>
+
+        <!-- SECOND POSTER SET -->
+        <div class="poster-set second-set">
+          <p class="poster-placeholder">"Nothing new as of yet."</p>
+        </div>
+
+        <!-- RIGHT ARROW -->
+        <img class="arrow right" src="../assets/BeoWuld Finger Right.png" alt="Right Arrow" style="width: 40px; height: auto; cursor: pointer;" onclick="document.getElementById('group2').checked = true;">
+    
+	  </div>
+      </div>
+	</section>
+
+        <!-- Contact Section -->
+    <section id="contact" style="background: white; display: flex; justify-content: center; align-items: center;">
+      <div>
+       
+	<img src="../assets/Logos.png" alt="Contact Content" class="center" usemap="#image-map">
+
+	<map name="image-map">
+	  <area target="" alt="Link1" title="BeoWuld LinkedIn" href="link1.html" coords="176,384,60" shape="circle">
+	  <area target="" alt="Link2" title="BeoWuld Youtube" href="link2.html" coords="258,273,60" shape="circle">
+	  <area target="" alt="Link3" title="BeoWuld X" href="link3.html" coords="431,301,69" shape="circle">
+	  <area target="" alt="Link4" title="BeoWuld Facebook" href="link4.html" coords="429,474,68" shape="circle">
+	  <area target="" alt="Link5" title="BeoWuld Instagram" href="link5.html" coords="549,198,47" shape="circle">
+	  <area target="" alt="Link6" title="BeoWuld Threads" href="link6.html" coords="595,333,66" shape="circle">
+	</map>
+   
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BeoWuld. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

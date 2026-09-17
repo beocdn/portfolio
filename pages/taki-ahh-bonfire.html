@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sinemulat-Entry</title>
+  <style>
+	header {
+      position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  background: #fff;
+	  color: #000;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 35px 60px;
+	  z-index: 1000;
+	}
+
+	.logo-fixed {
+      position: fixed;
+	  top: 10px;
+	  left: 20px;
+	  width: 90px;
+	  height: 90px;
+	  margin-left: 40px;
+	  z-index: 1001;
+	  cursor: pointer;
+	}
+
+	header nav {
+	  display: flex;
+	  align-items: center;
+	  margin-right: 120px;
+	}
+
+	header nav img {
+	  margin-left: 25px;
+	  width: 100px;
+	  height: auto;
+	  cursor: pointer;
+	}
+
+	.nav-img.about { width: 80px; }
+	.nav-img.portfolio { width: 130px; }
+	.nav-img.services { width: 113px; }
+	.nav-img.contact { width: 100px; }
+	
+
+
+  </style>
+</head>
+<body>
+
+	<!-- BeoWuld Icon -->
+		<a href="home main page.html">
+			<img class="logo-fixed" src="../assets/BeoWuld Logo White.png" alt="BeoWuld Logo">
+		</a>
+
+	<!-- Top Navigation -->
+	<header>
+	  <div></div>
+	  <nav>
+		<a href="home main page.html#about"><img class="nav-img about" src="../assets/About Asset.png" alt="About"></a>
+		<a href="home main page.html#branding"><img class="nav-img portfolio" src="../assets/Portfolio Asset.png" alt="Portfolio"></a>
+		<a href="home main page.html#services"><img class="nav-img services" src="../assets/Services Asset.png" alt="Services"></a>
+		<a href="home main page.html#contact"><img class="nav-img contact" src="../assets/Contact Asset.png" alt="Contact"></a>
+	  </nav>
+	</header>
+	
+	<!-- Tiny down arrow under the logo -->
+	<a href="home main page.html">
+	  <img src="../assets/Back Asset.png" alt="Back to Main"
+		   style="position: fixed; top: 110px; left: 10px; width: 90px; height: auto; cursor: pointer; z-index: 1001;">
+	</a>
+
+	<!-- Main content -->
+	
+	<main style="padding-top: 150px; text-align: center; position: relative;">
+  <div id="carousel" style="position: relative; display: flex; align-items: center; justify-content: center;">
+
+    <!-- Image -->
+    <img id="carouselImage" src="../assets/Takis bonfire.jpg"
+         alt="Selected Image" style="max-width: 50%; height: auto; display: block;">
+
+  </div>
+
+  <h1 style="font-family: Garamond, serif; font-variant: small-caps; font-weight: bold; font-size: 1.5em; margin-top: 20px;">Taki Ahh Bonfire</h1>
+  <p style="font-family: Garamond, serif; font-size: 1.2em; margin: 10px 20px;">Unfiltered photo of a bonfire set up by my brother one random night. I took a picture of it with my Redmi Note 13's main camera. It reminds me of the Mexican snack Takis hence the title.</p>
+</main>
+
+
+<script>
+  const images = [
+    "../assets/Takis bonfire.jpg",
+  ];
+  let currentIndex = 0;
+
+  const imageElement = document.getElementById("carouselImage");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    imageElement.src = images[currentIndex];
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    imageElement.src = images[currentIndex];
+  });
+</script>
+
+
+</body>
+</html>

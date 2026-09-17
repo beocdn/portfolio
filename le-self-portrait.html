@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sinemulat-Entry</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Garamond, serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 35px 60px;
+      z-index: 1000;
+    }
+
+    .logo-fixed {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      width: 90px;
+      height: 90px;
+      margin-left: 40px;
+      z-index: 1001;
+      cursor: pointer;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      margin-right: 120px;
+    }
+
+    header nav img {
+      margin-left: 25px;
+      width: 100px;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .nav-img.about { width: 80px; }
+    .nav-img.portfolio { width: 130px; }
+    .nav-img.services { width: 113px; }
+    .nav-img.contact { width: 100px; }
+
+    main {
+      padding-top: 150px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* --- CAROUSEL --- */
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .carousel input[type="radio"] {
+      display: none;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+    }
+
+    #slide1:checked ~ .slides .slide1,
+    #slide2:checked ~ .slides .slide2 {
+      display: block;
+    }
+
+    .slides {
+      position: relative;
+    }
+
+    .slide img,
+    .slide video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .arrow {
+      cursor: pointer;
+      z-index: 10;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .arrow.left {
+      left: -100px;
+    }
+
+    .arrow.right {
+      right: -100px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BeoWuld Icon -->
+  <a href="home main page.html">
+    <img class="logo-fixed" src="../assets/BeoWuld Logo White.png" alt="BeoWuld Logo">
+  </a>
+
+  <!-- Top Navigation -->
+  <header>
+    <div></div>
+    <nav>
+      <a href="home main page.html#about"><img class="nav-img about" src="../assets/About Asset.png" alt="About"></a>
+      <a href="home main page.html#branding"><img class="nav-img portfolio" src="../assets/Portfolio Asset.png" alt="Portfolio"></a>
+      <a href="home main page.html#services"><img class="nav-img services" src="../assets/Services Asset.png" alt="Services"></a>
+      <a href="home main page.html#contact"><img class="nav-img contact" src="../assets/Contact Asset.png" alt="Contact"></a>
+    </nav>
+  </header>
+
+  <!-- Tiny down arrow under the logo -->
+  <a href="home main page.html">
+    <img src="../assets/Back Asset.png" alt="Back to Main"
+         style="position: fixed; top: 110px; left: 10px; width: 90px; height: auto; cursor: pointer; z-index: 1001;">
+  </a>
+
+  <!-- Main content -->
+  <main>
+    <div class="carousel">
+      <!-- Radio Buttons for Slides -->
+      <input type="radio" name="carousel" id="slide1" checked>
+      <input type="radio" name="carousel" id="slide2">
+
+      <!-- Arrows -->
+      <label for="slide1" class="arrow left">
+        <img src="../assets/BeoWuld Finger Left.png" alt="Previous" style="width: 40px;">
+      </label>
+      <label for="slide2" class="arrow right">
+        <img src="../assets/BeoWuld Finger Right.png" alt="Next" style="width: 40px;">
+      </label>
+
+      <!-- Slides -->
+      <div class="slides">
+        <div class="slide slide1">
+          <img src="../assets/FINAL Le Self Portrait Asset.png" alt="Slide 1">
+        </div>
+        <div class="slide slide2">
+          <video autoplay muted loop playsinline>
+            <source src="../assets/Drawing Final Cadion.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <h1 style="font-variant: small-caps; font-weight: bold; font-size: 1.5em; margin-top: 20px;">Le Self Portrait</h1>
+    <p style="font-size: 1.2em; margin: 10px 20px;">The submission for my finals in drawing class as an MMA student. I used myself as reference and turned myself into a Greek-looking figure with my blanket as toga. Finished it on 12/20/23.</p>
+  </main>
+
+</body>
+</html>
